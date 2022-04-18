@@ -1,0 +1,18 @@
+# Patient App
+This is a project that enables the user to update the status of the patient to either `Randomized` or `Inactive`. 
+
+## How does the app work?
+- First we create a function to fetch the data from data.json file named `fetchData` localised within the /utils folder. 
+- Then we use useEffect to execute `fetchData` after the component gets rendered (to “perform side effects”). useEffect can be limited to cases where a selected set of values change. These values are referred to as ‘dependencies’. 
+- We then use the `setPatients` function to set the patients to the data fetched from the data.json file. The useState is used to maintain the data response from the data.json in the component.
+- We use the Context APIs in the /contexts folder to enable us to define the context Object which stores the patients data and the function to update the patient status and will make it available throughout the hierarchy without passing the data as props.
+- We then use the `useContext` hook to access the context Object and use the `setStatus` function to update the patients data if they have not been given an status.
+- In the App.tsx file we display the main UI of the application. We use our custom `Tabs` component located at /components/Tabs.tsx to display the tabs and patients data dinamically. In the state, we keep track of the active tab index so that you can track which of the tabs is currently active. Inside the tabs section, we loop through the children and display each title in a <button />. On click of the tab button, we set the index as the current active tab. The tab-content section will display the content of the active tab.
+
+
+## Technologies Used.
+- React
+- React-Router
+- Context API
+- Styled-Components
+- TypeScript

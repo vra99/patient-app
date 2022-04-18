@@ -17,7 +17,6 @@ export const useAppContext = () => {
     return context;
 }
 
-
 const ContextProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
     const [patients, setPatients] = useState<IPatient[]>([]);
     

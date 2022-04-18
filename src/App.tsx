@@ -19,7 +19,7 @@ const App = () => {
     const { patients, inactivePatients, randomizedPatients } = useAppContext();
 
     const Patients= React.useMemo(() => ({patient}: any) => {
-        return patient.map(( data: IPatient) => (
+        return patient && patient.map(( data: IPatient) => (
             <Card patient= {data} key={data.patientId}/>
         ));
     }, []);
@@ -29,7 +29,8 @@ const App = () => {
           <div>
               <h1> Patients </h1>
           </div>
-          <Tabs>
+          { patients &&
+            <Tabs>
               <div title={`Inactive(${inactivePatients.length})`}>
                   <Patients patient={inactivePatients} />
               </div>
@@ -39,7 +40,8 @@ const App = () => {
               <div title={`All(${patients.length})`}>
                   <Patients patient={patients} />
               </div>
-          </Tabs>
+            </Tabs>
+        }
       </Container>
   )
 }  
