@@ -1,9 +1,23 @@
 # Patient App
 This is a project that enables the user to update the status of the patient to either `Randomized` or `Inactive`. 
 
+## How to install and start the app?
+Run the following command in the terminal:
+
+```
+yarn install
+```
+
+Then run the following command to start the app:
+
+```
+yarn run start
+```
+
+
 ## How does the app work?
 - First we create a function to fetch the data from data.json file named `fetchData` localised within the /utils folder. 
-```
+```ts
 export const fetchData = async() => {
     try {
         const data= await fetch(`/patients`);
@@ -18,7 +32,7 @@ export const fetchData = async() => {
 - We use the Context APIs in the /contexts folder to enable us to define the context Object which stores the patients data and the function to update the patient status and will make it available throughout the hierarchy without passing the data as props.
 
 - We set the types for the context to define the schema for the patients data and context structure.
-```
+```ts
 export interface IPatient   {
     location: {
       locationId: number;
@@ -52,7 +66,7 @@ export interface IPatientContext {
 ```
 
 - Then we use useEffect to execute `fetchData` after the component gets rendered (to “perform side effects”). useEffect can be limited to cases where a selected set of values change. These values are referred to as ‘dependencies’. We then use the `setPatients` function to set the patients to the data fetched from the data.json file. The useState is used to maintain the data response from the data.json in the component.
-```
+```tsx
 const ContextProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
     const [patients, setPatients] = useState<IPatient[]>([]);
 
@@ -65,13 +79,13 @@ const ContextProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
 ```
 
 - We then use the `useContext` hook to access the context Object and use the `setStatus` function to update the patients data if they have not been given an status.
-```
+```tsx
     const { patients, inactivePatients, randomizedPatients } = useAppContext();
 ```
 
 - In the App.tsx file we display the main UI of the application. We use our custom `Tabs` component located at /components/Tabs.tsx to display the tabs and patients data dinamically. In the state, we keep track of the active tab index so that you can track which of the tabs is currently active. Inside the tabs section, we loop through the children and display each title in a <button />. On click of the tab button, we set the index as the current active tab. The tab-content section will display the content of the active tab.
 
-```
+```tsx
 export const Tabs= React.memo((props: TabsProps) => {
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
   const activeTab = props.children[activeTabIndex];
@@ -115,7 +129,7 @@ export const Tabs= React.memo((props: TabsProps) => {
   );
 });
 ```
-```
+```tsx
     <Tabs>
         <div title={`Inactive(${inactivePatients.length})`}>
             <Patients patient={inactivePatients} />
