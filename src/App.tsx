@@ -29,7 +29,7 @@ const App = () => {
           <div>
               <h1> Patients </h1>
           </div>
-          { patients &&
+          { patients.length &&
             <Tabs>
               <div title={`Inactive(${inactivePatients.length})`}>
                   <Patients patient={inactivePatients} />
