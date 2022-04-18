@@ -20,13 +20,9 @@ export const useAppContext = () => {
 const ContextProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
     const [patients, setPatients] = useState<IPatient[]>([]);
      
-    const inactivePatients=  React.useMemo(() => {
-        return patients?.filter(patient => patient.status === "inactive");
-    }, [patients]);
+    const inactivePatients= patients.length ? patients.filter(patient => patient.status === "inactive") : patients;
 
-    const randomizedPatients= React.useMemo (() => {
-       return patients?.filter(patient => patient.status === "randomized");
-    }, [patients]);
+    const randomizedPatients= patients.length ? patients.filter(patient => patient.status === "randomized") : patients;
 
     const setStatus = (patientId: number , status : "inactive" | "randomized") => {
         const newPatients = patients?.map(patient => {
@@ -40,7 +36,10 @@ const ContextProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
 
     useEffect(() => {
       fetchData()
-        .then( data => setPatients(data))
+        .then( data => {
+            console.log("data", data);
+            setPatients(data)
+        })
         .catch( error => console.log(error))
     }, []);
 
