@@ -22,7 +22,7 @@ const App = () => {
         return patient.map(( data: IPatient) => (
             <Card patient= {data} key={data.patientId}/>
         ));
-    }, [patients]);
+    }, []);
 
   return (
       <Container>
