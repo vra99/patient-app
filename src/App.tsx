@@ -24,6 +24,8 @@ const App = () => {
         ));
     }, []);
 
+    console.log(patients);
+
   return (
       <Container>
           <div>
