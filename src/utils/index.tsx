@@ -1,5 +1,5 @@
 export const fetchData = async() => {
-    try{
+    try {
         const data= await fetch(`/patients`);
         const response= await data.json();
         return response

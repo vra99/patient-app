@@ -3,6 +3,19 @@ This is a project that enables the user to update the status of the patient to e
 
 ## How does the app work?
 - First we create a function to fetch the data from data.json file named `fetchData` localised within the /utils folder. 
+```
+export const fetchData = async() => {
+    try {
+        const data= await fetch(`/patients`);
+        const response= await data.json();
+        return response
+    }
+    catch(error){
+        return error
+    }
+}
+```
+
 - Then we use useEffect to execute `fetchData` after the component gets rendered (to “perform side effects”). useEffect can be limited to cases where a selected set of values change. These values are referred to as ‘dependencies’. 
 - We then use the `setPatients` function to set the patients to the data fetched from the data.json file. The useState is used to maintain the data response from the data.json in the component.
 - We use the Context APIs in the /contexts folder to enable us to define the context Object which stores the patients data and the function to update the patient status and will make it available throughout the hierarchy without passing the data as props.
