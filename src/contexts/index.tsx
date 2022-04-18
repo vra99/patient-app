@@ -37,7 +37,6 @@ const ContextProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
     useEffect(() => {
       fetchData()
         .then( data => {
-            console.log("data", data);
             setPatients(data)
         })
         .catch( error => console.log(error))
