@@ -21,11 +21,11 @@ const ContextProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
     const [patients, setPatients] = useState<IPatient[]>([]);
      
     const inactivePatients=  React.useMemo(() => {
-        return patients.length ? patients.filter(patient => patient.status === "inactive") : patients;
+        return patients?.filter(patient => patient.status === "inactive");
     }, [patients]);
 
     const randomizedPatients= React.useMemo (() => {
-       return patients.length ? patients.filter(patient => patient.status === "randomized") : patients;
+       return patients?.filter(patient => patient.status === "randomized");
     }, [patients]);
 
     const setStatus = (patientId: number , status : "inactive" | "randomized") => {
